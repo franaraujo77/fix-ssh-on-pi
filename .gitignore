@@ -1,4 +1,6 @@
-fix-ssh-on-pi.ini
+.DS_Store
+*.ini
 wpa_supplicant.conf
 *.img
 *.zip
+.ssh
