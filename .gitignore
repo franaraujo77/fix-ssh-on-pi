@@ -1,2 +1,4 @@
 fix-ssh-on-pi.ini
 wpa_supplicant.conf
+*.img
+*.zip
