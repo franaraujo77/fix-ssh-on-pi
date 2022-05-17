@@ -156,7 +156,8 @@ chmod 0600 "${sdcard_mount}/home/pi/.ssh/authorized_keys"
 
 echo "[Unit]
 Description=FirstBoot
-After=network.target
+After=network-online.target
+Wants=network-online.target
 Before=rc-local.service
 ConditionFileNotEmpty=/boot/firstboot.sh
 
