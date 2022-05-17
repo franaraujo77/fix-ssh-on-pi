@@ -1,0 +1,1 @@
+ksys:$(echo 'put your password in here'|openssl passwd -6 -stdin)

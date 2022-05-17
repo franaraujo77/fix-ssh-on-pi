@@ -41,6 +41,9 @@ variables=(
   version
   sha_file
   config_file
+  raspberry_compressed_image
+  extracted_image
+  userconf_file
 )
 
 for variable in "${variables[@]}"
@@ -71,7 +74,7 @@ then
 fi
 
 # unzip
-extracted_image=$( 7z l raspbian_image.zip | awk '/-raspios-/ {print $NF}' )
+#extracted_image=$( 7z l ${raspberry_compressed_image} | awk '/raspios-/ {print $NF}' )
 echo "The name of the image is \"${extracted_image}\""
 
 if [ ! -e ${extracted_image} ]
@@ -106,6 +109,13 @@ if [ ! -e "${sdcard_mount}/ssh" ]
 then
     echo "Can't find the ssh file \"${sdcard_mount}/ssh\""
     exit 9
+fi
+
+cp -v "${userconf_file}" "${sdcard_mount}/userconf.txt"
+if [ ! -e "${sdcard_mount}/userconf.txt" ]
+then
+    echo "Can't find the userconf.txt file \"${sdcard_mount}/userconf.txt\""
+    exit 10
 fi
 
 if [ -e "${first_boot}" ]

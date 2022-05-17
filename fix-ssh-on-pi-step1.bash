@@ -41,6 +41,9 @@ variables=(
   version
   sha_file
   config_file
+  raspberry_compressed_image
+  extracted_image
+  userconf_file
 )
 
 for variable in "${variables[@]}"
@@ -81,7 +84,7 @@ function umount_sdcard () {
 }
 
 # Download the latest image, using the  --continue "Continue getting a partially-downloaded file"
-wget --continue ${image_to_download} -O raspbian_image.zip
+wget --continue ${image_to_download} -O ${raspberry_compressed_image}
 
 #echo "Checking the SHA-1 of the downloaded image matches \"${sha_sum}\""
 
@@ -94,16 +97,24 @@ else
     exit 5
 fi
 
+raspberry_image=$( ls *.img.xz )
+
+if [ ! -e ${raspberry_compressed_image} ]
+then
+    echo "Can't find the compressed image \"${raspberry_compressed_image}\""
+    exit 5
+fi
+
 if [ ! -d "${sdcard_mount}" ]
 then
   mkdir ${sdcard_mount}
 fi
 
 # unzip
-extracted_image=$( 7z l raspbian_image.zip | awk '/-raspios-/ {print $NF}' )
+#extracted_image=$( 7z l ${raspberry_compressed_image} | awk '/raspios-/ {print $NF}' )
 echo "The name of the image is \"${extracted_image}\""
 
-7z x -y raspbian_image.zip
+7z x -y ${raspberry_compressed_image}
 
 if [ ! -e ${extracted_image} ]
 then

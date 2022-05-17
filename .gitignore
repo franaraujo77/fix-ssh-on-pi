@@ -4,3 +4,5 @@ wpa_supplicant.conf
 *.img
 *.zip
 .ssh
+userconf.txt
+*.xz
