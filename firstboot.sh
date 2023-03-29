@@ -1,11 +1,22 @@
 #!/bin/bash
 
+exec >> /boot/firstboot.log
+exec 2>&1
+
 function log () {
   DATE_WITH_TIME=`date "+%Y%m%d-%H%M%S"` #add %3N as we want millisecond too
   echo "${DATE_WITH_TIME} $1" >> /boot/firstboot.log
 }
 
 log "Start execution"
+
+log "Install htpdate to synchronize date and time automatically"
+apt install htpdate -y
+
+log "Update apt cache and upgrade packages"
+apt update
+apt upgrade -y
+
 macadd=$( ip -brief add | awk '/UP/ {print $1}' | sort | head -1 )
 
 log "macadd: ${macadd}"
