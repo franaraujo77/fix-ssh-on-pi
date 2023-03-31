@@ -34,6 +34,8 @@ variables=(
   url_base
   armbian_compressed_image
   extracted_image
+  first_boot
+  custom_scripts_folder
 )
 
 for variable in "${variables[@]}"

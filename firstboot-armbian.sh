@@ -16,14 +16,14 @@ cp -R /root/.ssh /home/ksys
 chown -R ksys:ksys /home/ksys/.ssh
 echo "ksys	ALL = (ALL)  NOPASSWD: ALL" >> /etc/sudoers
 
-log "Add opt mount point"
-dd bs=1M if=/dev/zero of=/dev/nvme0n1 count=2000 status=progress
-sync
-blkid --match-token TYPE=ext4 /dev/nvme0n1 || \
-                  mkfs -t ext4 /dev/nvme0n1 && \
-                  echo "/dev/nvme0n1 /opt auto defaults 0 2" >> /etc/fstab
-mkdir /opt
-chown -R ksys:ksys /opt
+#log "Add opt mount point"
+#dd bs=1M if=/dev/zero of=/dev/nvme0n1 count=2000 status=progress
+#sync
+#blkid --match-token TYPE=ext4 /dev/nvme0n1 || \
+#                  mkfs -t ext4 /dev/nvme0n1 && \
+#                  echo "/dev/nvme0n1 /opt auto defaults 0 2" >> /etc/fstab
+#mkdir /opt
+#chown -R ksys:ksys /opt
 
 log "Install htpdate to synchronize date and time automatically"
 apt install htpdate -y

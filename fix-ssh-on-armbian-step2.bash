@@ -35,6 +35,7 @@ variables=(
   armbian_compressed_image
   extracted_image
   first_boot
+  custom_scripts_folder
 )
 
 for variable in "${variables[@]}"
@@ -110,6 +111,13 @@ if [ ! -e "${sdcard_mount}/etc/shadow" ]
 then
     echo "Can't find the mounted card\"${sdcard_mount}/etc/shadow\""
     exit 10
+fi
+
+if [ -e "${custom_scripts_folder}" ]
+then
+  cp -vR "${custom_scripts_folder}" "${sdcard_mount}/usr/local/bin/scripts"
+  chown 1000:1000 "${sdcard_mount}/usr/local/bin/scripts"
+  chmod ug+x "${sdcard_mount}/usr/local/bin/scripts"
 fi
 
 echo "Change the passwords and sshd_config file"
