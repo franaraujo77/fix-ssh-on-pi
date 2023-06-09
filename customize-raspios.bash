@@ -14,17 +14,17 @@ docker run --privileged --mount src="${PWD}",target=/opt/fix-pi,type=bind ubuntu
 
 rm -rf raspbian_image.zip
 
-echo ""
-echo "Downloading OS HF image"
-echo ""
+#echo ""
+#echo "Downloading OS HF image"
+#echo ""
 
-docker run --privileged --mount src="${PWD}",target=/opt/fix-pi,type=bind ubuntu /opt/fix-pi/run-step1-hf.bash
+#docker run --privileged --mount src="${PWD}",target=/opt/fix-pi,type=bind ubuntu /opt/fix-pi/run-step1-hf.bash
 
-echo ""
-echo "Preparing OS HF image"
-echo ""
+#echo ""
+#echo "Preparing OS HF image"
+#echo ""
 
-docker run --privileged --mount src="${PWD}",target=/opt/fix-pi,type=bind ubuntu /opt/fix-pi/run-step2-hf.bash
+#docker run --privileged --mount src="${PWD}",target=/opt/fix-pi,type=bind ubuntu /opt/fix-pi/run-step2-hf.bash
 
 echo ""
 echo "All jobs done"
