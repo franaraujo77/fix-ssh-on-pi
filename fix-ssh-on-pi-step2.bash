@@ -86,7 +86,8 @@ fi
 umount_sdcard
 echo "Mounting the sdcard boot disk"
 
-loop_base="/dev/loop0" #$( losetup --partscan --find --show "${extracted_image}" )
+loop_fullpath=$( losetup -l | grep ${extracted_image}| awk '{print $1}' )
+loop_base="/dev/$(basename ${loop_fullpath})" 
 
 echo "Running: mount ${loop_base}p1 \"${sdcard_mount}\" "
 mount ${loop_base}p1 "${sdcard_mount}"
