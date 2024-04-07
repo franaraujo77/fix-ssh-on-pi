@@ -10,13 +10,19 @@ function log () {
 
 log "Start execution"
 
-log "Install htpdate to synchronize date and time automatically"
+log "Install htpdate to synchronize date and time automatically and enable other software packages installation"
 apt install htpdate -y
 
-log "Update apt cache and upgrade packages"
+log "Update apt cache"
 apt update
-apt upgrade -y
 
+#log "Install required packages"
+#apt install docker \
+#    docker.io \
+#    ansible \
+#    -y
+
+log "Update hostname configuration"
 macadd=$( ip -brief add | awk '/UP/ {print $1}' | sort | head -1 )
 
 log "macadd: ${macadd}"
@@ -27,6 +33,9 @@ then
   sed "s/raspberrypi/${macadd}/g" -i /etc/hostname /etc/hosts
   log "hostname and hosts updated"
 fi
+
+
+
 /sbin/shutdown -r 5 "reboot in five minutes"
 
 log "Finish execution"
