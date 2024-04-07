@@ -83,9 +83,9 @@ loop_base="/dev/$(basename ${loop_fullpath})"
 echo "Running: mount ${loop_base}p1 \"${sdcard_mount}\" "
 mount ${loop_base}p1 "${sdcard_mount}"
 ls -al /mnt/sdcard
-if [ ! -e ${sdcard_mount}/vmlinuz* ]
+if [ ! -e ${sdcard_mount}/Image ]
 then
-    echo "Can't find the mounted card\"${sdcard_mount}/vmlinuz\" kernel"
+    echo "Can't find the mounted card\"${sdcard_mount}/Image\" kernel"
     exit 7
 fi
 
