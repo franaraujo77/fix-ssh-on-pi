@@ -126,7 +126,8 @@ fi
 
 if [ -e "${config_file}" ]
 then
-  cp -v "${config_file}" "${sdcard_mount}/config.txt"
+#  cp -v "${config_file}" "${sdcard_mount}/config.txt"
+  cp -v "${sdcard_mount}/config.txt" "${config_file}-original" 
 fi
 
 umount_sdcard
